@@ -1,6 +1,18 @@
 import numpy as np
 import argparse
 
+# -------------------------------------
+# 
+# written in python3
+# usage: hmm_jointprob.py [-h] [-o OUTPUTPREFIX] hmm sequences
+# 
+# example: 
+# python3 hmm_jointprob.py -o pred-test-sequences-project2 hmm-tm.txt test-sequences-project2.txt 
+# 
+# elaborated in --help
+# 
+# -------------------------------------
+
 np.seterr(divide='ignore')
 
 hidden = {}
@@ -55,7 +67,7 @@ def write_hmm(outputfile):
   output.write(str(emissions)+'\n')
   output.close()
 
-def process_sequencefile(argfile, outputfile, hidden_included=False):
+def process_sequencefile(argfile, outputfile, mode):
   # write_hmm(outputfile)
 
   f = open(argfile, 'r')
@@ -67,23 +79,33 @@ def process_sequencefile(argfile, outputfile, hidden_included=False):
     while curr_line.strip():
       name = curr_line[1:].rstrip()
       observed_seq = f.readline().strip()
-      if (hidden_included):
+
+      if (mode == 'log_joint_prob'):
+        # WRITE LOG JOINT PROBABILITY TO OUTPUT FILE
         hidden_seq = f.readline()[2:].strip()
+        log_joint_prob = log_joint_prob(observed_seq, hidden_seq)
+        output.write("%s\nlog P(x,z) = %f\n\n" % (name, log_joint_prob))
+      
+      elif (mode == 'viterbi'):
+        # WRITE VITERBI HIDDEN SEQUENCE PREDICTION AND PROBABILITY OF SEQUENCE
+        log_most_likely_prob, hidden_seq = viterbi_logspace_backtrack(observed_seq)
+        str_viterbi_result = ""
+        str_viterbi_result += '>'+name+'\n'
+        str_viterbi_result += observed_seq+'\n'
+        str_viterbi_result += '#\n'
+        str_viterbi_result += hidden_seq+'\n'
+        str_viterbi_result += '; log P(x,z) = %f\n\n' % log_most_likely_prob
+        output.write(str_viterbi_result)
 
-      # WRITE LOG JOINT PROBABILITY TO OUTPUT FILE
-      # log_joint_prob = log_joint_prob(observed_seq, hidden_seq)
-      # output.write("%s\nlog P(x,z) = %f\n\n" % (name, log_joint_prob))
-
-      # WRITE VITERBI HIDDEN SEQUENCE PREDICTION AND PROBABILITY OF SEQUENCE
-    #   log_most_likely_prob, hidden_seq = viterbi_logspace_backtrack(observed_seq)
-      log_most_likely_prob, hidden_seq = posterior_sequence_decoding(observed_seq)
-      str_viterbi_result = ""
-      str_viterbi_result += '>'+name+'\n'
-      str_viterbi_result += observed_seq+'\n'
-      str_viterbi_result += '#\n'
-      str_viterbi_result += hidden_seq+'\n'
-      str_viterbi_result += '; log P(x,z) = %f\n\n' % log_most_likely_prob
-      output.write(str_viterbi_result)
+      else: # mode == 'posterior'
+        log_most_likely_prob, hidden_seq = posterior_sequence_decoding(observed_seq)
+        str_posterior_result = ""
+        str_posterior_result += '>'+name+'\n'
+        str_posterior_result += observed_seq+'\n'
+        str_posterior_result += '#\n'
+        str_posterior_result += hidden_seq+'\n'
+        str_posterior_result += '; log P(x,z) = %f\n\n' % log_most_likely_prob
+        output.write(str_posterior_result)
       
       f.readline() # skip empty separation line
       curr_line = f.readline() # read next sequence name, empty if at EOF
@@ -318,8 +340,6 @@ def scaling_backward(aSequence, c):
     # get idx of next observation (n+1) to use with defined matrix data structures
     idx_curr_obs = observables.get(aSequence[obs+1])
     
-    # beta_hat[-1]
-    
     # get emission probabilities of current observation for all states
     emissions_curr_obs = emissions[:,idx_curr_obs]
     
@@ -379,23 +399,21 @@ def main():
   parser = argparse.ArgumentParser()
   parser.add_argument("hmm", help="Hidden Markov Model specification file")
   parser.add_argument("sequences", help="File containing input sequences")
-  parser.add_argument("-o", "--output", type=str, help="File to output results to")
+  parser.add_argument("-o", "--outputprefix", type=str, help="Prefix name of the output files. Modes will be appended to name")
   args = parser.parse_args()
   
   hmm_file = args.hmm
   sequences_file = args.sequences
-  output_file = "output.txt"
+  output_file = "output"
 
   if (args.output is not None):
-    output_file = args.output
+    output_file = args.outputprefix
 
   load_hmm(hmm_file)
   
-  process_sequencefile(sequences_file, output_file)
+  process_sequencefile(sequences_file, output_file+"-viterbi.txt", "viterbi")
+  process_sequencefile(sequences_file, output_file+"-posterior.txt", "posterior")
   
-#   observed = "MAKNLILWLVIAVVLMSVFQSFGPSESNGRKVDYSTFLQEVNNDQVREARINGREINVTKKDSNRYTTYIPVQDPKLLDNLLTKNVKVVGEPPEEPSLLASIFISWFPMLLLIGVWIFFMRQMQGGGGKGAMSFGKSKARMLTEDQIKTTFADVAGCDEAKEEVAELVEYLREPSRFQKLGGKIPKGVLMVGPPGTGKTLLAKAIAGEAKVPFFTISGSDFVEMFVGVGASRVRDMFEQAKKAAPCIIFIDEIDAVGRQRGAGLGGGHDEREQTLNQMLVEMDGFEGNEGIIVIAATNRPDVLDPALLRPGRFDRQVVVGLPDVRGREQILKVHMRRVPLAPDIDAAIIARGTPGFSGADLANLVNEAALFAARGNKRVVSMVEFEKAKDKIMMGAERRSMVMTEAQKESTAYHEAGHAIIGRLVPEHDPVHKVTIIPRGRALGVTFFLPEGDAISASRQKLESQISTLYGGRLAEEIIYGPEHVSTGASNDIKVATNLARNMVTQWGFSEKLGPLLYAEEEGEVFLGRSVAKAKHMSDETARIIDQEVKALIERNYNRARQLLTDNMDILHAMKDALMKYETIDAPQIDDLMARRDVRPPAGWEEPGASNNSGDNGSPKAPRPVDEPRTPNPGNTMSEQLGDK"
-#   hidden_seq = posterior_sequence_decoding(observed)
-#   print(log_joint_prob(observed, hidden_seq))
 
 
 if __name__ == '__main__':
