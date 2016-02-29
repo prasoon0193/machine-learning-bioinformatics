@@ -406,7 +406,7 @@ def main():
   sequences_file = args.sequences
   output_file = "output"
 
-  if (args.output is not None):
+  if (args.outputprefix is not None):
     output_file = args.outputprefix
 
   load_hmm(hmm_file)

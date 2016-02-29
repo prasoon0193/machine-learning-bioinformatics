@@ -5,12 +5,13 @@ np.seterr(divide='ignore')
 
 hidden = {}
 observables = {}
+rev_observables = {}
 pi = []
 transitions = []
 emissions = []
 
 def load_hmm(state):
-  global hidden, observables, pi, transitions, emissions
+  global hidden, observables, rev_observables, pi, transitions, emissions
 
   # pi, transitions & emissions will be all zeros initially in 3-state
   if state == '3-state':
@@ -24,6 +25,9 @@ def load_hmm(state):
     str_observables = 'A C E D G F I H K M L N Q P S R T W V Y'
     for (i, v) in enumerate(str_observables.split(' ')):
       observables[i] = v
+
+    # reverse key:value for compatibility with viterbi_logspace_backtrack
+    rev_observables = {v: k for k, v in observables.items()}
 
     # initialize pi; K x 1
     for _ in range(len(hidden)):
@@ -75,8 +79,6 @@ def load_hmm(state):
       pi[hidden_to_idx(k)] = v
 
     
-
-
 def obs_to_idx(argObs):
   for (k, v) in observables.items():
     if v == argObs:
@@ -88,6 +90,85 @@ def hidden_to_idx(argHiddenState):
     if v == argHiddenState:
       return k
   return None  
+
+def viterbi_logspace_backtrack(aSequence):
+  # BASIS
+  idx_first_obs = rev_observables.get(aSequence[0])
+  omega = np.log([pi]) + np.log(emissions[:,idx_first_obs])
+  
+  # RECURSIVE
+  for obs in range(1, len(aSequence)):
+
+    max_vector = []
+    # iterating through all states to generate next col in omega
+    for i, _ in enumerate(hidden):
+
+      # find transition probabilities from every state to this current state
+      trans_to_state_i = transitions[:,i]
+      
+      # fetch previous col in omega
+      prev_omega_col = omega[-1]
+
+      # find the max probability that this state will follow from the prev col
+      state_i_max_prob = np.max(prev_omega_col + np.log(trans_to_state_i))
+
+      # save for multiplying with emission probabilities to determine omega col
+      max_vector.append(state_i_max_prob)
+
+    # get idx of current observation to use with defined matrix data structures
+    idx_curr_obs = rev_observables.get(aSequence[obs])
+    
+    # get emission probabilities of current observation for all states
+    emissions_curr_obs = emissions[:,idx_curr_obs]
+    
+    # create and add the new col to the omega table
+    new_omega_col = np.log(emissions_curr_obs) + max_vector
+    omega = np.append(omega, [new_omega_col], axis=0)
+
+  # natural log to the most likely probability when all the input is processeds
+  log_most_likely_prob = np.max(omega[-1])
+
+  # BACKTRACKING
+
+  N = len(aSequence)-1  # off-by-one correction for indexing into lists
+  K = len(hidden)
+  z = np.zeros(len(aSequence))
+  z[N] = np.argmax(omega[len(omega)-1], axis=0)
+
+  # n descending from N-1 to 0 inclusive
+  for n in range(N-1, -1, -1):
+    max_vector = []
+    for k in range(0, K):
+      # only for matching pseudocode easily
+      x = aSequence
+
+      # matrix data structure index of observation
+      idx_obs = rev_observables.get(x[n+1])
+
+      # probability of observing x[n+1] in state z[n+1]
+      p_xn1_zn1 = emissions[z[n+1]][idx_obs]
+
+      # our omega table indexing is flipped compared to the pseudocode alg.
+      omega_kn = omega[n][k]
+ 
+      # get transitions from state k to state z[n+1]
+      p_zn1_k = transitions[k,z[n+1]]
+
+      # add product to max_vector
+      max_vector.append(np.log(p_xn1_zn1) + omega_kn + np.log(p_zn1_k))
+      
+    # set z[n] to arg max of max_vector
+    z[n] = np.argmax(max_vector)
+
+  # add one to correspond to actual states rather than indexes into 'states'
+  z = z + 1
+  
+  # conversion from indices to actual state names
+  hidden_seq = ""
+  for i in z:
+    hidden_seq += hidden[i - 1]
+
+  return (log_most_likely_prob, hidden_seq)
 
 def count_single_sequence(argObsSeq, argHiddenSeq):
   seq_transitions = {}
@@ -244,10 +325,6 @@ def print_hmm():
 def main():
   load_hmm('3-state')
   print_hmm()
-
-  
-  
-  
 
 
 if __name__ == '__main__':
