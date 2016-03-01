@@ -1,6 +1,7 @@
 import numpy as np
 import argparse
 import hmm_jointprob_transmembrane as hmm_jp
+import re
 
 np.seterr(divide='ignore')
 
@@ -59,7 +60,7 @@ def load_hmm(state):
 
     # retrieve event counting for training
     total_transitions, trans_event_countings, total_emissions, \
-    emission_event_countings, init_states = count_events_all_data_files()
+    emission_event_countings, init_states = count_events_all_data_files('3-state')
 
     # normalize countings
     for k, v in trans_event_countings.items():
@@ -87,6 +88,7 @@ def load_hmm(state):
     for k, v in init_states.items():
       pi[hidden_to_idx(k)] = v
 
+  # o -> N -> i -> M -> o
   elif state == '4-state':
     # initialize hidden
     str_hidden = 'i M N o'
@@ -122,10 +124,35 @@ def load_hmm(state):
     emissions = np.array(emissions)
 
     # retrieve event counting for training
-    # total_transitions, trans_event_countings, total_emissions, \
+    total_transitions, trans_event_countings, total_emissions, \
+    emission_event_countings, init_states = count_events_all_data_files('4-state')
 
+    # normalize countings
+    for k, v in trans_event_countings.items():
+      trans_event_countings[k] = v / total_transitions[k[0]]
 
-    
+    for k, v in emission_event_countings.items():
+      emission_event_countings[k] = v / total_emissions[k[0]]
+      # emission_event_countings[k] = float("{0:.5f}".format(v / total_emissions[k[0]]))
+
+    total_sequences = sum(init_states.values())
+    for k, v in init_states.items():
+      init_states[k] = v / total_sequences
+
+    # update hmm with probabilities based on event countings
+    for k, v in trans_event_countings.items():
+      idx_from = hidden_to_idx(k[0])
+      idx_to = hidden_to_idx(k[1])
+      transitions[idx_from][idx_to] = v
+
+    for k, v in emission_event_countings.items():
+      idx_hidden = hidden_to_idx(k[0])
+      idx_obs = obs_to_idx(k[1])
+      emissions[idx_hidden][idx_obs] = v
+
+    for k, v in init_states.items():
+      pi[hidden_to_idx(k)] = v
+
 def obs_to_idx(argObs):
   for (k, v) in observables.items():
     if v == argObs:
@@ -137,6 +164,66 @@ def hidden_to_idx(argHiddenState):
     if v == argHiddenState:
       return k
   return None  
+
+def count_single_sequence_4state(argObsSeq, argHiddenSeq):
+  def replace_Ns(inputseq):
+    """ given a sequence of hidden states, replaces the occurences of 'M'
+        corresponding to the state 'N' in the 4-state model with the actual
+        letter 'N' to ease event counting """
+    replace_indices = []
+
+    for match in re.finditer('M+i', inputseq):
+      replace_indices.append(match.span())
+    result = list(inputseq)
+    for repl in replace_indices:
+      idx_start = repl[0]
+      idx_end = repl[1] - 1
+      result[idx_start:idx_end] = 'N' * (idx_end - idx_start)
+    intermediate_result = ''.join(result)
+
+    replace_indices.clear()
+    result.clear()
+
+    for match in re.finditer('oM+', intermediate_result):
+      replace_indices.append(match.span())
+    result = list(intermediate_result)
+    for repl in replace_indices:
+      idx_start = repl[0] + 1
+      idx_end = repl[1]
+      result[idx_start:idx_end] = 'N' * (idx_end - idx_start)
+    final_result = ''.join(result)
+
+    return final_result
+
+  seq_transitions = {}
+  seq_emissions = {}
+  nr_transitions = {}
+  nr_emissions = {}
+  init_state = {}
+  if (argHiddenSeq[0] in ['i', 'o']):
+    init_state[argHiddenSeq[0]] = 1
+  else:
+    # keep going till we see either an 'i' or 'o' to determine whether
+    # we're in the membrane going out or in, to decide between 'N' and 'M'
+    curr_sym = argHiddenSeq[0]
+    c = 0
+    while (curr_sym not in ['i', 'o']):
+      c += 1
+      curr_sym = argHiddenSeq[c]
+    if (curr_sym == 'i'):
+      # we went from membrane to inside, initial state must have been 'N'
+      init_state['N'] = 1
+    else: # curr_sym == 'o'
+      # we went from membrane to outside, initial state must have been 'M'
+      init_state['M'] = 1
+  
+  argHiddenSeq_N_replaced = replace_Ns(argHiddenSeq)
+
+  nr_emissions, seq_emissions, nr_transitions, seq_transitions, \
+  _ = count_single_sequence(argObsSeq, argHiddenSeq_N_replaced)
+
+  return nr_emissions, seq_emissions, nr_transitions, \
+         seq_transitions, init_state
 
 def count_single_sequence(argObsSeq, argHiddenSeq):
   seq_transitions = {}
@@ -207,7 +294,7 @@ def add_dicts(dict1, dict2):
       result[k2] = v2
   return result
 
-def process_sequencefile(argfile):
+def process_sequencefile(argfile, model):
   with open(argfile, 'r') as f:
     
     curr_line = f.readline()
@@ -229,8 +316,12 @@ def process_sequencefile(argfile):
       hidden_seq = f.readline()[2:].strip()
 
       # count transitions & emissions in current sequence
-      nr_em, seq_em, nr_trans, \
-      seq_trans, init_state = count_single_sequence(observed_seq, hidden_seq)
+      if (model == '3-state'):
+        nr_em, seq_em, nr_trans, \
+        seq_trans, init_state = count_single_sequence(observed_seq, hidden_seq)
+      else:
+        nr_em, seq_em, nr_trans, \
+        seq_trans, init_state = count_single_sequence_4state(observed_seq, hidden_seq)
     
       # update result dicts with the countings from this sequence
       trans_event_countings = add_dicts(trans_event_countings, seq_trans)
@@ -245,7 +336,7 @@ def process_sequencefile(argfile):
   return total_transitions, trans_event_countings, \
          total_emissions, emission_event_countings, init_states
 
-def count_events_all_data_files():
+def count_events_all_data_files(model):
   # initialize processing results to empty values
   trans_event_countings = {}
   emission_event_countings = {}
@@ -259,7 +350,7 @@ def count_events_all_data_files():
 
     with open(curr_file, 'r') as f:
       curr_total_trans, curr_trans_event_countings, curr_total_em, \
-      curr_em_event_countings, curr_init_states = process_sequencefile(curr_file)
+      curr_em_event_countings, curr_init_states = process_sequencefile(curr_file, model)
 
       # update results with current file countings
       trans_event_countings = add_dicts(trans_event_countings, curr_trans_event_countings)
@@ -352,22 +443,26 @@ def decode_all_data_files(hmmfile):
         print(hidden_seq)
         print("VITERBI DECODING:")
         print(vit_hidden_pred)
+        print(vit_log_prob)
         print('POSTERIOR DECODING:')
         print(post_hidden_pred)
+        print(post_log_prob)
         print('\n\n')
 
         f.readline() # skip empty line
         curr_line = f.readline()
     
 def main():
-  load_hmm('3-state')
-  # print_hmm()
 
+  load_hmm('3-state')
+  print_hmm()
   write_hmm('3-state-hmm.txt')
+  # load_hmm('4-state')
+  # print_hmm()
+  # write_hmm('4-state-hmm.txt')
 
   decode_all_data_files('3-state-hmm.txt')
-  
-
+  # decode_all_data_files('4-state-hmm.txt')
 
 if __name__ == '__main__':
   main()
