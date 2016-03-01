@@ -1,5 +1,6 @@
 import numpy as np
 import argparse
+import hmm_jointprob_transmembrane as hmm_jp
 
 np.seterr(divide='ignore')
 
@@ -12,6 +13,13 @@ emissions = []
 
 def load_hmm(state):
   global hidden, observables, rev_observables, pi, transitions, emissions
+
+  hidden = {}
+  observables = {}
+  rev_observables = {}
+  pi = []
+  transitions = []
+  emissions = []
 
   # pi, transitions & emissions will be all zeros initially in 3-state
   if state == '3-state':
@@ -59,6 +67,7 @@ def load_hmm(state):
 
     for k, v in emission_event_countings.items():
       emission_event_countings[k] = v / total_emissions[k[0]]
+      # emission_event_countings[k] = float("{0:.5f}".format(v / total_emissions[k[0]]))
 
     total_sequences = sum(init_states.values())
     for k, v in init_states.items():
@@ -78,6 +87,44 @@ def load_hmm(state):
     for k, v in init_states.items():
       pi[hidden_to_idx(k)] = v
 
+  elif state == '4-state':
+    # initialize hidden
+    str_hidden = 'i M N o'
+    for (i, v) in enumerate(str_hidden.split(' ')):
+      hidden[i] = v    
+  
+    # initialize observables
+    str_observables = 'A C E D G F I H K M L N Q P S R T W V Y'
+    for (i, v) in enumerate(str_observables.split(' ')):
+      observables[i] = v
+
+    # reverse key:value for compatibility with viterbi_logspace_backtrack
+    rev_observables = {v: k for k, v in observables.items()}
+
+    # initialize pi; K x 1
+    for _ in range(len(hidden)):
+      pi.append(0.0)
+
+    # initialize transitions; K x K
+    K = len(hidden); # K = number of hidden states
+    for i in range(K):
+      transitions.append([])
+      for j in range(K):
+        transitions[i].append(0.0)
+    transitions = np.array(transitions)
+
+    # initialize emissions; K x Obs where Obs is number of observables
+    Obs = len(observables); # K = number of hidden states
+    for i in range(K):
+      emissions.append([])
+      for j in range(Obs):
+        emissions[i].append(0.0)
+    emissions = np.array(emissions)
+
+    # retrieve event counting for training
+    # total_transitions, trans_event_countings, total_emissions, \
+
+
     
 def obs_to_idx(argObs):
   for (k, v) in observables.items():
@@ -90,85 +137,6 @@ def hidden_to_idx(argHiddenState):
     if v == argHiddenState:
       return k
   return None  
-
-def viterbi_logspace_backtrack(aSequence):
-  # BASIS
-  idx_first_obs = rev_observables.get(aSequence[0])
-  omega = np.log([pi]) + np.log(emissions[:,idx_first_obs])
-  
-  # RECURSIVE
-  for obs in range(1, len(aSequence)):
-
-    max_vector = []
-    # iterating through all states to generate next col in omega
-    for i, _ in enumerate(hidden):
-
-      # find transition probabilities from every state to this current state
-      trans_to_state_i = transitions[:,i]
-      
-      # fetch previous col in omega
-      prev_omega_col = omega[-1]
-
-      # find the max probability that this state will follow from the prev col
-      state_i_max_prob = np.max(prev_omega_col + np.log(trans_to_state_i))
-
-      # save for multiplying with emission probabilities to determine omega col
-      max_vector.append(state_i_max_prob)
-
-    # get idx of current observation to use with defined matrix data structures
-    idx_curr_obs = rev_observables.get(aSequence[obs])
-    
-    # get emission probabilities of current observation for all states
-    emissions_curr_obs = emissions[:,idx_curr_obs]
-    
-    # create and add the new col to the omega table
-    new_omega_col = np.log(emissions_curr_obs) + max_vector
-    omega = np.append(omega, [new_omega_col], axis=0)
-
-  # natural log to the most likely probability when all the input is processeds
-  log_most_likely_prob = np.max(omega[-1])
-
-  # BACKTRACKING
-
-  N = len(aSequence)-1  # off-by-one correction for indexing into lists
-  K = len(hidden)
-  z = np.zeros(len(aSequence))
-  z[N] = np.argmax(omega[len(omega)-1], axis=0)
-
-  # n descending from N-1 to 0 inclusive
-  for n in range(N-1, -1, -1):
-    max_vector = []
-    for k in range(0, K):
-      # only for matching pseudocode easily
-      x = aSequence
-
-      # matrix data structure index of observation
-      idx_obs = rev_observables.get(x[n+1])
-
-      # probability of observing x[n+1] in state z[n+1]
-      p_xn1_zn1 = emissions[z[n+1]][idx_obs]
-
-      # our omega table indexing is flipped compared to the pseudocode alg.
-      omega_kn = omega[n][k]
- 
-      # get transitions from state k to state z[n+1]
-      p_zn1_k = transitions[k,z[n+1]]
-
-      # add product to max_vector
-      max_vector.append(np.log(p_xn1_zn1) + omega_kn + np.log(p_zn1_k))
-      
-    # set z[n] to arg max of max_vector
-    z[n] = np.argmax(max_vector)
-
-  # add one to correspond to actual states rather than indexes into 'states'
-  z = z + 1
-  
-  # conversion from indices to actual state names
-  hidden_seq = ""
-  for i in z:
-    hidden_seq += hidden[i - 1]
-
-  return (log_most_likely_prob, hidden_seq)
 
 def count_single_sequence(argObsSeq, argHiddenSeq):
   seq_transitions = {}
@@ -225,7 +193,6 @@ def count_single_sequence(argObsSeq, argHiddenSeq):
 
   return nr_emissions, seq_emissions, nr_transitions, seq_transitions, init_state
   
-
 def add_dicts(dict1, dict2):
   """ Returns a dict consisting of all keys from both dict1 and dict2.
       In case of common keys, adds together the corresponding values"""
@@ -239,7 +206,6 @@ def add_dicts(dict1, dict2):
     if k2 not in dict1:
       result[k2] = v2
   return result
-
 
 def process_sequencefile(argfile):
   with open(argfile, 'r') as f:
@@ -280,7 +246,7 @@ def process_sequencefile(argfile):
          total_emissions, emission_event_countings, init_states
 
 def count_events_all_data_files():
-# initialize processing results to empty values
+  # initialize processing results to empty values
   trans_event_countings = {}
   emission_event_countings = {}
   total_transitions = {}
@@ -305,7 +271,6 @@ def count_events_all_data_files():
   return total_transitions, trans_event_countings, \
          total_emissions, emission_event_countings, total_init_states
 
-
 def print_hmm():
   print('hidden')
   print(hidden)
@@ -322,9 +287,86 @@ def print_hmm():
   print('\nemissions')
   print(emissions)
 
+def write_hmm(argfile):
+  with open(argfile, 'w') as output:
+    # write 'hidden' to file
+    output.write('#\n#\n#\n\nhidden\n')
+    str_hidden = ''
+    for k, v in sorted(hidden.items(), key=lambda x: x[0]):
+      str_hidden += v + ' '
+    output.write(str_hidden.rstrip())
+
+    # write 'observables' to file
+    output.write('\n\nobservables\n')
+    str_observables = ''
+    for k, v in sorted(observables.items(), key=lambda x: x[0]):
+      str_observables += v + ' '
+    output.write(str_observables.rstrip())
+
+    # write 'pi' to file
+    output.write('\n\npi\n')
+    str_pi = ''
+    for fl in pi:
+      str_pi += str(fl) + ' '
+    output.write(str_pi.rstrip())
+
+    # write 'transitions' to file
+    output.write('\n\ntransitions\n')
+    str_transitions = ''
+    for i in range(len(transitions)):
+      for j in range(len(transitions[i])):
+        str_transitions += str(transitions[i,j]) + ' '
+      str_transitions = str_transitions.rstrip() + '\n'
+    output.write(str_transitions)
+
+    # write 'emissions' to file
+    output.write('\nemissions\n')
+    str_emissions = ''
+    for i in range(len(emissions)):
+      for j in range(len(emissions[i])):
+        str_emissions += str(emissions[i,j]) + ' '
+      str_emissions = str_emissions.rstrip() + '\n'
+    output.write(str_emissions+'\n')
+
+def decode_all_data_files(hmmfile):
+  hmm_jp.load_hmm(hmmfile)
+
+  for i in range(10):
+    curr_file = 'Dataset160/set160.%i.labels.txt' % i
+
+    with open(curr_file, 'r') as f:
+      curr_line = f.readline()
+
+      # stops when whole sequence file has been processed 
+      #  (reaches an empty line where a name was expected)
+      while curr_line.strip():
+        # load current sequence information from file
+        name = curr_line[1:].rstrip()
+        observed_seq = f.readline().strip()
+        hidden_seq = f.readline()[2:].strip()
+
+        print("NAME: " + name)
+        vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
+        post_log_prob, post_hidden_pred = hmm_jp.posterior_sequence_decoding(observed_seq)
+        print("ACTUAL:")
+        print(hidden_seq)
+        print("VITERBI DECODING:")
+        print(vit_hidden_pred)
+        print('POSTERIOR DECODING:')
+        print(post_hidden_pred)
+        print('\n\n')
+
+        f.readline() # skip empty line
+        curr_line = f.readline()
+    
 def main():
   load_hmm('3-state')
-  print_hmm()
+  # print_hmm()
+
+  write_hmm('3-state-hmm.txt')
+
+  decode_all_data_files('3-state-hmm.txt')
+  
 
 
 if __name__ == '__main__':
