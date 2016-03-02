@@ -423,7 +423,7 @@ def write_hmm(argfile):
       str_emissions = str_emissions.rstrip() + '\n'
     output.write(str_emissions+'\n')
 
-def ten_fold_cross_validation(model):
+def ten_fold_cross_validation(model, decoding):
   file_ids = list(range(10))
   file_ids_to_be_excluded = list(range(10))
 
@@ -459,18 +459,21 @@ def ten_fold_cross_validation(model):
         observed_seq = f.readline().strip()
         hidden_seq = f.readline()[2:].strip()
 
-        print("RUNNING VITERBI DECODING")
-        vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
-
-
-        # if we predicted using the 4-state model, the predictions will likely
-        # contain instances of 'N', a state in our model corresponding to the
-        # actual state 'M'. We need these replaced with 'M' in our final answer
-        vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
-
         output.write('>'+name+'\n')
         output.write(' '+observed_seq+'\n')
-        output.write('# '+vit_hidden_pred+'\n\n')
+
+        if decoding == 'posterior':
+          print("RUNNING POSTERIOR DECODING")
+          post_log_prob, post_hidden_pred = hmm_jp.posterior_sequence_decoding(observed_seq)
+          if model == '4-state':
+            post_hidden_pred = re.sub('N', 'M', post_hidden_pred)
+          output.write('# '+post_hidden_pred+'\n\n')
+        else:
+          print("RUNNING VITERBI DECODING")
+          vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
+          if model == '4-state':
+            vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
+          output.write('# '+vit_hidden_pred+'\n\n')
         
         # prepare for next sequence
         f.readline() # skip empty line
@@ -532,7 +535,7 @@ def main():
   # decode_all_data_files('3-state-hmm.txt')
   # decode_all_data_files('4-state-hmm.txt')
 
-  ten_fold_cross_validation('4-state')
+  ten_fold_cross_validation('4-state', 'posterior')
 
 if __name__ == '__main__':
   main()
