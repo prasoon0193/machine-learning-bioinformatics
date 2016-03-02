@@ -41,6 +41,12 @@ def print_hmm():
 def load_hmm(afile):
   global transitions, hidden, observables, pi, emissions
 
+  hidden = {}
+  observables = {}
+  pi = []
+  transitions = []
+  emissions = []
+
   f = open(afile, 'r')
   
   # skip three commentary lines + newline
@@ -410,6 +416,21 @@ def scale(unscaled_value, scalar):
   # corresponding scalar from 'c'
   return np.e**unscaled_value / scalar
 
+def print_hmm():
+  print('hidden')
+  print(hidden)
+
+  print('\nobservables')
+  print(observables)
+
+  print('\npi')
+  print(pi)
+
+  print('\ntransitions')
+  print(transitions)
+
+  print('\nemissions')
+  print(emissions)
 
 def main():
   parser = argparse.ArgumentParser()

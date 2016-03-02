@@ -12,7 +12,7 @@ pi = []
 transitions = []
 emissions = []
 
-def load_hmm(state):
+def train_hmm(model, specific_files=None):
   global hidden, observables, rev_observables, pi, transitions, emissions
 
   hidden = {}
@@ -23,8 +23,8 @@ def load_hmm(state):
   emissions = []
 
   # pi, transitions & emissions will be all zeros initially in 3-state
-  if state == '3-state':
-
+  if model == '3-state':
+    print("TRAINING 3-STATE")
     # initialize hidden
     str_hidden = 'i M o'
     for (i, v) in enumerate(str_hidden.split(' ')):
@@ -60,7 +60,7 @@ def load_hmm(state):
 
     # retrieve event counting for training
     total_transitions, trans_event_countings, total_emissions, \
-    emission_event_countings, init_states = count_events_all_data_files('3-state')
+    emission_event_countings, init_states = count_events_in_data_files('3-state', specific_files)
 
     # normalize countings
     for k, v in trans_event_countings.items():
@@ -89,7 +89,8 @@ def load_hmm(state):
       pi[hidden_to_idx(k)] = v
 
   # o -> N -> i -> M -> o
-  elif state == '4-state':
+  elif model == '4-state':
+    print("TRAINING 4-STATE")
     # initialize hidden
     str_hidden = 'i M N o'
     for (i, v) in enumerate(str_hidden.split(' ')):
@@ -125,7 +126,7 @@ def load_hmm(state):
 
     # retrieve event counting for training
     total_transitions, trans_event_countings, total_emissions, \
-    emission_event_countings, init_states = count_events_all_data_files('4-state')
+    emission_event_countings, init_states = count_events_in_data_files('4-state', specific_files)
 
     # normalize countings
     for k, v in trans_event_countings.items():
@@ -336,7 +337,7 @@ def process_sequencefile(argfile, model):
   return total_transitions, trans_event_countings, \
          total_emissions, emission_event_countings, init_states
 
-def count_events_all_data_files(model):
+def count_events_in_data_files(model, specific_files=None):
   # initialize processing results to empty values
   trans_event_countings = {}
   emission_event_countings = {}
@@ -344,9 +345,12 @@ def count_events_all_data_files(model):
   total_emissions = {}
   total_init_states = {}
 
-  # iterate all ten data files
-  for i in range(10):
+  # iterate all ten data files, or specific ones if specified
+  file_ids = specific_files if specific_files else range(10)
+  for i in file_ids:
     curr_file = 'Dataset160/set160.%i.labels.txt' % i
+
+    # print("TRAINING ON " + curr_file)
 
     with open(curr_file, 'r') as f:
       curr_total_trans, curr_trans_event_countings, curr_total_em, \
@@ -419,6 +423,61 @@ def write_hmm(argfile):
       str_emissions = str_emissions.rstrip() + '\n'
     output.write(str_emissions+'\n')
 
+def ten_fold_cross_validation(model):
+  file_ids = list(range(10))
+  file_ids_to_be_excluded = list(range(10))
+
+  hmm_filename = 'tenfold_current_hmm.txt'
+
+  while file_ids_to_be_excluded: # terminates when list is empty
+    # pull one file out for validation
+    validation_id = file_ids_to_be_excluded.pop()
+    validation_file = 'Dataset160/set160.%i.labels.txt' % validation_id
+    # filter the validation file from the list of all files, leaving the 9 others
+    training_files = file_ids[: validation_id] + file_ids[validation_id+1 :]
+
+    # train on the 9 remaining files
+    train_hmm(model, training_files)
+
+
+    write_hmm(hmm_filename)
+    hmm_jp.load_hmm(hmm_filename)
+
+    # the two should match
+    # print_hmm()
+    # hmm_jp.print_hmm()
+
+    # predict sequences in validation file, write predictions to output file
+    with open(validation_file, 'r') as f, open(validation_file[:-4]+'_PREDICTIONS.txt', 'w') as output:
+      curr_line = f.readline()
+
+      # stops when whole sequence file has been processed 
+      #  (reaches an empty line where a name was expected)
+      while curr_line.strip():
+        # load current sequence information from file
+        name = curr_line[1:].rstrip()
+        observed_seq = f.readline().strip()
+        hidden_seq = f.readline()[2:].strip()
+
+        print("RUNNING VITERBI DECODING")
+        vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
+
+
+        # if we predicted using the 4-state model, the predictions will likely
+        # contain instances of 'N', a state in our model corresponding to the
+        # actual state 'M'. We need these replaced with 'M' in our final answer
+        vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
+
+        output.write('>'+name+'\n')
+        output.write(' '+observed_seq+'\n')
+        output.write('# '+vit_hidden_pred+'\n\n')
+        
+        # prepare for next sequence
+        f.readline() # skip empty line
+        curr_line = f.readline()
+
+    print("FINISHED TRAINING\n\n")
+
 def decode_all_data_files(hmmfile):
   hmm_jp.load_hmm(hmmfile)
 
@@ -436,9 +495,17 @@ def decode_all_data_files(hmmfile):
         observed_seq = f.readline().strip()
         hidden_seq = f.readline()[2:].strip()
 
-        print("NAME: " + name)
         vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
         post_log_prob, post_hidden_pred = hmm_jp.posterior_sequence_decoding(observed_seq)
+
+        # if we predicted using the 4-state model, the predictions will likely
+        # contain instances of 'N', a state in our model corresponding to the
+        # actual state 'M'. We need these replaced with 'M' in our final answer
+        vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
+        post_hidden_pred = re.sub('N', 'M', post_hidden_pred)
+
+        # report predictions
+        print("NAME: " + name)
         print("ACTUAL:")
         print(hidden_seq)
         print("VITERBI DECODING:")
@@ -449,20 +516,23 @@ def decode_all_data_files(hmmfile):
         print(post_log_prob)
         print('\n\n')
 
+        # prepare for next sequence
         f.readline() # skip empty line
         curr_line = f.readline()
     
 def main():
 
-  load_hmm('3-state')
-  print_hmm()
-  write_hmm('3-state-hmm.txt')
-  # load_hmm('4-state')
+  # train_hmm('3-state')
+  # print_hmm()
+  # write_hmm('3-state-hmm.txt')
+  # train_hmm('4-state')
   # print_hmm()
   # write_hmm('4-state-hmm.txt')
 
-  decode_all_data_files('3-state-hmm.txt')
+  # decode_all_data_files('3-state-hmm.txt')
   # decode_all_data_files('4-state-hmm.txt')
+
+  ten_fold_cross_validation('4-state')
 
 if __name__ == '__main__':
   main()
