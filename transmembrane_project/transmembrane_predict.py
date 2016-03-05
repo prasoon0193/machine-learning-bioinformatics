@@ -154,6 +154,71 @@ def train_hmm(model, specific_files=None):
     for k, v in init_states.items():
       pi[hidden_to_idx(k)] = v
 
+  else: # model == 'helix'
+    print("TRAINING HELIX")
+    # initialize hidden
+    str_hidden = 'i A B C D E M F G H I J o P Q R S T N O V X Y Z'
+    for (i, v) in enumerate(str_hidden.split(' ')):
+      hidden[i] = v
+  
+    # initialize observables
+    str_observables = 'A C E D G F I H K M L N Q P S R T W V Y'
+    for (i, v) in enumerate(str_observables.split(' ')):
+      observables[i] = v
+
+    # reverse key:value for compatibility with viterbi_logspace_backtrack
+    rev_observables = {v: k for k, v in observables.items()}
+
+    # initialize pi; K x 1
+    for _ in range(len(hidden)):
+      pi.append(0.0)
+
+    # initialize transitions; K x K
+    K = len(hidden); # K = number of hidden states
+    for i in range(K):
+      transitions.append([])
+      for j in range(K):
+        transitions[i].append(0.0)
+    transitions = np.array(transitions)
+
+    # initialize emissions; K x Obs where Obs is number of observables
+    Obs = len(observables); # K = number of hidden states
+    for i in range(K):
+      emissions.append([])
+      for j in range(Obs):
+        emissions[i].append(0.0)
+    emissions = np.array(emissions)
+
+    # retrieve event counting for training
+    total_transitions, trans_event_countings, total_emissions, \
+    emission_event_countings, init_states = count_events_in_data_files('helix', specific_files)
+
+    # normalize countings
+    for k, v in trans_event_countings.items():
+      trans_event_countings[k] = v / total_transitions[k[0]]
+
+    for k, v in emission_event_countings.items():
+      emission_event_countings[k] = v / total_emissions[k[0]]
+      # emission_event_countings[k] = float("{0:.5f}".format(v / total_emissions[k[0]]))
+
+    total_sequences = sum(init_states.values())
+    for k, v in init_states.items():
+      init_states[k] = v / total_sequences
+
+    # update hmm with probabilities based on event countings
+    for k, v in trans_event_countings.items():
+      idx_from = hidden_to_idx(k[0])
+      idx_to = hidden_to_idx(k[1])
+      transitions[idx_from][idx_to] = v
+
+    for k, v in emission_event_countings.items():
+      idx_hidden = hidden_to_idx(k[0])
+      idx_obs = obs_to_idx(k[1])
+      emissions[idx_hidden][idx_obs] = v
+
+    for k, v in init_states.items():
+      pi[hidden_to_idx(k)] = v
+
 def obs_to_idx(argObs):
   for (k, v) in observables.items():
     if v == argObs:
@@ -165,6 +230,108 @@ def hidden_to_idx(argHiddenState):
     if v == argHiddenState:
       return k
   return None  
+
+def count_single_sequence_helix(argObsSeq, argHiddenSeq):
+  """ assumes no sequences of 'M' less than 11 are in input files """
+  def replace_Ns(inputseq):
+    """ given a sequence of hidden states, replaces the occurences of 'M'
+        corresponding to the state 'N' in the 4-state model with the actual
+        letter 'N' to ease event counting """
+    replace_indices = []
+    for match in re.finditer('M+i', inputseq):
+      replace_indices.append(match.span())
+    result = list(inputseq)
+    for repl in replace_indices:
+      idx_start = repl[0]
+      idx_end = repl[1] - 1
+      result[idx_start:idx_end] = 'N' * (idx_end - idx_start)
+    intermediate_result = ''.join(result)
+    replace_indices.clear()
+    result.clear()
+    for match in re.finditer('oM+', intermediate_result):
+      replace_indices.append(match.span())
+    result = list(intermediate_result)
+    for repl in replace_indices:
+      idx_start = repl[0] + 1
+      idx_end = repl[1]
+      result[idx_start:idx_end] = 'N' * (idx_end - idx_start)
+    final_result = ''.join(result)
+    return final_result
+
+  def replace_Ms_and_Ns(inputseq):
+    """ given a sequence of hidden states, replaces the occurences of 'M'
+        and 'N' with their corresponding amino acid in the helix, where 
+        states A-E are the first five amino acids in the membrane coming from
+        the inside, 'M' being the sixth loop state in this helix, F-J being the
+        last fice amino acids before going to the outside through the membrane.
+        Coming from the outside, going inside through the membrane, states
+        P-T are the first five, 'N' is the loop, O-Z are the last five before
+        ending on the inside again.
+    """
+    replace_indices = []
+    for match in re.finditer('iMMMMM', inputseq):
+      replace_indices.append(match.span())
+    result = list(inputseq)
+    for repl in replace_indices:
+      idx_start = repl[0] + 1
+      idx_end = repl[1]
+      result[idx_start:idx_end] = 'ABCDE'
+    intermediate_result = ''.join(result)
+    replace_indices.clear()
+    result.clear()
+    for match in re.finditer('MMMMMo', intermediate_result):
+      replace_indices.append(match.span())
+    result = list(intermediate_result)
+    for repl in replace_indices:
+      idx_start = repl[0]
+      idx_end = repl[1] - 1
+      result[idx_start:idx_end] = 'FGHIJ'
+    intermediate_result = ''.join(result)
+    # MANGLER AT ERSTATTE oNNNNN og NNNNNi
+    replace_indices.clear()
+    result.clear()
+    for match in re.finditer('oNNNNN', intermediate_result):
+      replace_indices.append(match.span())
+    result = list(intermediate_result)
+    for repl in replace_indices:
+      idx_start = repl[0] + 1
+      idx_end = repl[1]
+      result[idx_start:idx_end] = 'PQRST'
+    intermediate_result = ''.join(result)
+    replace_indices.clear()
+    result.clear()
+    for match in re.finditer('NNNNNi', intermediate_result):
+      replace_indices.append(match.span())
+    result = list(intermediate_result)
+    for repl in replace_indices:
+      idx_start = repl[0]
+      idx_end = repl[1] - 1
+      result[idx_start:idx_end] = 'OVXYZ'
+    final_result = ''.join(result)
+    return final_result
+
+
+  seq_transitions = {}
+  seq_emissions = {}
+  nr_transitions = {}
+  nr_emissions = {}
+  init_state = {}
+
+  if (argHiddenSeq[0] in ['i', 'o']):
+    init_state[argHiddenSeq[0]] = 1
+  else:
+    print("OH NOES")
+    # does not happen with the given files, no occurences
+    # of initial states other than 'i' and 'o'
+  
+  argHiddenSeq_helix_replaced = replace_Ms_and_Ns(replace_Ns(argHiddenSeq))
+
+  nr_emissions, seq_emissions, nr_transitions, seq_transitions, \
+  _ = count_single_sequence(argObsSeq, argHiddenSeq_helix_replaced)
+
+
+  return nr_emissions, seq_emissions, nr_transitions, \
+         seq_transitions, init_state
 
 def count_single_sequence_4state(argObsSeq, argHiddenSeq):
   def replace_Ns(inputseq):
@@ -320,9 +487,12 @@ def process_sequencefile(argfile, model):
       if (model == '3-state'):
         nr_em, seq_em, nr_trans, \
         seq_trans, init_state = count_single_sequence(observed_seq, hidden_seq)
-      else:
+      elif (model == '4-state'):
         nr_em, seq_em, nr_trans, \
         seq_trans, init_state = count_single_sequence_4state(observed_seq, hidden_seq)
+      else: # model == 'helix'
+        nr_em, seq_em, nr_trans, \
+        seq_trans, init_state = count_single_sequence_helix(observed_seq, hidden_seq)
     
       # update result dicts with the countings from this sequence
       trans_event_countings = add_dicts(trans_event_countings, seq_trans)
@@ -467,12 +637,24 @@ def ten_fold_cross_validation(model, decoding):
           post_log_prob, post_hidden_pred = hmm_jp.posterior_sequence_decoding(observed_seq)
           if model == '4-state':
             post_hidden_pred = re.sub('N', 'M', post_hidden_pred)
+          elif model == 'helix':
+            post_hidden_pred = re.sub('N', 'M', post_hidden_pred)
+            post_hidden_pred = re.sub('ABCDE', 'MMMMM', post_hidden_pred)
+            post_hidden_pred = re.sub('FGHIJ', 'MMMMM', post_hidden_pred)
+            post_hidden_pred = re.sub('PQRST', 'MMMMM', post_hidden_pred)
+            post_hidden_pred = re.sub('UVXYZ', 'MMMMM', post_hidden_pred)
           output.write('# '+post_hidden_pred+'\n\n')
         else:
           print("RUNNING VITERBI DECODING")
           vit_log_prob, vit_hidden_pred = hmm_jp.viterbi_logspace_backtrack(observed_seq)
           if model == '4-state':
             vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
+          elif model == 'helix':
+            vit_hidden_pred = re.sub('N', 'M', vit_hidden_pred)
+            vit_hidden_pred = re.sub('ABCDE', 'MMMMM', vit_hidden_pred)
+            vit_hidden_pred = re.sub('FGHIJ', 'MMMMM', vit_hidden_pred)
+            vit_hidden_pred = re.sub('PQRST', 'MMMMM', vit_hidden_pred)
+            vit_hidden_pred = re.sub('UVXYZ', 'MMMMM', vit_hidden_pred)
           output.write('# '+vit_hidden_pred+'\n\n')
         
         # prepare for next sequence
@@ -528,14 +710,16 @@ def main():
   # train_hmm('3-state')
   # print_hmm()
   # write_hmm('3-state-hmm.txt')
+  
   # train_hmm('4-state')
   # print_hmm()
   # write_hmm('4-state-hmm.txt')
 
-  # decode_all_data_files('3-state-hmm.txt')
-  # decode_all_data_files('4-state-hmm.txt')
+  train_hmm('helix')
+  print_hmm()
+  write_hmm('helix-hmm.txt')
 
-  ten_fold_cross_validation('4-state', 'posterior')
+  ten_fold_cross_validation('helix', 'posterior')
 
 if __name__ == '__main__':
   main()

@@ -1,0 +1,587 @@
+marc@skodborg:~/Documents/AU/Git/machine-learning-bioinformatics/transmembrane_project$ . compare_script.sh 
+>FTSH_ECOLI
+Sn = 0.5333, Sp = 1.0000, CC = 0.7178, AC = 0.7497
+
+>GAA1_CHICK
+Sn = 0.5517, Sp = 0.8727, CC = 0.6426, AC = 0.6540
+
+>GAA4_BOVIN
+Sn = 0.5747, Sp = 0.8197, CC = 0.6408, AC = 0.6481
+
+>GAB1_HUMAN
+Sn = 0.5778, Sp = 0.8000, CC = 0.6202, AC = 0.6255
+
+>GAB_LYMST
+Sn = 0.6111, Sp = 0.7857, CC = 0.6360, AC = 0.6393
+
+>GAC1_RAT
+Sn = 0.4828, Sp = 0.9767, CC = 0.6463, AC = 0.6751
+
+>GAD_MOUSE
+Sn = 0.5165, Sp = 0.8704, CC = 0.6141, AC = 0.6280
+
+>GAR1_HUMAN
+Sn = 0.5165, Sp = 0.8246, CC = 0.5937, AC = 0.6045
+
+>GAR2_HUMAN
+Sn = 0.5055, Sp = 0.8519, CC = 0.5995, AC = 0.6132
+
+>GRA1_HUMAN
+Sn = 0.5057, Sp = 0.8302, CC = 0.5891, AC = 0.6012
+
+>GRB_RAT
+Sn = 0.6353, Sp = 0.8438, CC = 0.6868, AC = 0.6915
+
+>HOXN_ALCEU
+Sn = 0.6429, Sp = 0.8640, CC = 0.5737, AC = 0.5742
+
+>IMMA_CITFR
+Sn = 0.3882, Sp = 0.9706, CC = 0.4797, AC = 0.4935
+
+>KDGL_ECOLI
+Sn = 0.6429, Sp = 1.0000, CC = 0.7011, AC = 0.7038
+
+>RFBP_SALTY
+Sn = 0.6353, Sp = 0.8060, CC = 0.6630, AC = 0.6661
+
+>RIB1_RAT
+Sn = 0.5000, Sp = 0.4286, CC = 0.4451, AC = 0.4464
+
+Summary (over all sequences):
+Sn = 0.5577, Sp = 0.8482, CC = 0.6347, AC = 0.6441
+
+
+
+>4F2_HUMAN
+Sn = 0.5652, Sp = 1.0000, CC = 0.7445, AC = 0.7729
+
+>5H2A_CRIGR
+Sn = 0.6541, Sp = 0.8667, CC = 0.6542, AC = 0.6564
+
+>5HT3_HUMAN
+Sn = 0.7176, Sp = 0.7625, CC = 0.6856, AC = 0.6857
+
+>5HT3_MOUSE
+Sn = 0.7176, Sp = 0.8841, CC = 0.7595, AC = 0.7622
+
+>A4_HUMAN
+Sn = 0.5833, Sp = 0.5833, CC = 0.5699, AC = 0.5699
+
+>COX3_PARDE
+Sn = 0.6082, Sp = 0.9043, CC = 0.4902, AC = 0.4903
+
+>CYOC_ECOLI
+Sn = 0.8211, Sp = 0.8966, CC = 0.7448, AC = 0.7449
+
+>GLPA_HUMAN
+Sn = 0.5652, Sp = 0.4815, CC = 0.4267, AC = 0.4276
+
+>GLPC_HUMAN
+Sn = 0.8750, Sp = 0.9130, CC = 0.8700, AC = 0.8701
+
+>GLP_PIG
+Sn = 0.5652, Sp = 1.0000, CC = 0.7198, AC = 0.7409
+
+>GSPI_ERWCA
+Sn = 0.5714, Sp = 1.0000, CC = 0.7240, AC = 0.7444
+
+>HEMA_CDVO
+Sn = 0.9048, Sp = 0.8636, CC = 0.8797, AC = 0.8799
+
+>HEMA_MEASH
+Sn = 0.5417, Sp = 1.0000, CC = 0.7292, AC = 0.7617
+
+>LSPA_ECOLI
+Sn = 0.5672, Sp = 1.0000, CC = 0.6608, AC = 0.6685
+
+>NGFR_HUMAN
+Sn = 0.5455, Sp = 0.4615, CC = 0.4723, AC = 0.4737
+
+>SECF_ECOLI
+Sn = 0.6667, Sp = 0.9231, CC = 0.6843, AC = 0.6866
+
+Summary (over all sequences):
+Sn = 0.6647, Sp = 0.8538, CC = 0.7113, AC = 0.7151
+
+
+
+>CYDB_ECOLI
+Sn = 0.7500, Sp = 0.8276, CC = 0.6462, AC = 0.6462
+
+>ENVZ_ECOLI
+Sn = 0.5610, Sp = 0.8846, CC = 0.6828, AC = 0.6979
+
+>GLPT_ECOLI
+Sn = 0.5492, Sp = 0.9571, CC = 0.5609, AC = 0.5625
+
+>GSPN_ERWCA
+Sn = 0.8571, Sp = 0.5625, CC = 0.6606, AC = 0.6720
+
+>IMM0_ECOLI
+Sn = 0.5574, Sp = 0.9714, CC = 0.5801, AC = 0.5817
+
+>IMM1_ECOLI
+Sn = 0.7018, Sp = 1.0000, CC = 0.7337, AC = 0.7344
+
+>KGTP_ECOLI
+Sn = 0.5172, Sp = 0.9643, CC = 0.5099, AC = 0.5104
+
+>KPM1_ECOLI
+Sn = 0.5714, Sp = 1.0000, CC = 0.6368, AC = 0.6406
+
+>MPRD_HUMAN
+Sn = 0.6000, Sp = 0.8824, CC = 0.7069, AC = 0.7180
+
+>MYP0_HUMAN
+Sn = 0.7308, Sp = 0.6333, CC = 0.6400, AC = 0.6412
+
+>NEP_HUMAN
+Sn = 0.6957, Sp = 1.0000, CC = 0.8301, AC = 0.8431
+
+>PBP3_ECOLI
+Sn = 0.8947, Sp = 0.6296, CC = 0.7411, AC = 0.7516
+
+>SECY_BACSU
+Sn = 0.6188, Sp = 0.9766, CC = 0.6615, AC = 0.6641
+
+>SECY_ECOLI
+Sn = 0.6935, Sp = 0.9583, CC = 0.7103, AC = 0.7116
+
+>TAL6_HUMAN
+Sn = 0.7143, Sp = 1.0000, CC = 0.7386, AC = 0.7390
+
+>UHPT_ECOLI
+Sn = 0.6268, Sp = 0.7529, CC = 0.4701, AC = 0.4702
+
+Summary (over all sequences):
+Sn = 0.6251, Sp = 0.8961, CC = 0.6676, AC = 0.6723
+
+
+
+>ADT_RICPR
+Sn = 0.5873, Sp = 0.8757, CC = 0.5300, AC = 0.5308
+
+>BAC1_HALS1
+Sn = 0.5563, Sp = 0.9333, CC = 0.5199, AC = 0.5202
+
+>BACH_HALSS
+Sn = 0.5854, Sp = 0.8421, CC = 0.4387, AC = 0.4387
+
+>BACR_HALHA
+Sn = 0.4929, Sp = 0.9718, CC = 0.5347, AC = 0.5383
+
+>COX1_PARDE
+Sn = 0.6628, Sp = 0.9611, CC = 0.6810, AC = 0.6824
+
+>COX2_PARDE
+Sn = 0.4308, Sp = 1.0000, CC = 0.6038, AC = 0.6386
+
+>CX1B_PARDE
+Sn = 0.5918, Sp = 0.9902, CC = 0.5881, AC = 0.5881
+
+>CYDA_ECOLI
+Sn = 0.7286, Sp = 0.7846, CC = 0.6713, AC = 0.6715
+
+>CYOB_ECOLI
+Sn = 0.7627, Sp = 0.8272, CC = 0.6416, AC = 0.6416
+
+>DSBB_ECOLI
+Sn = 0.6087, Sp = 0.9333, CC = 0.6498, AC = 0.6539
+
+>FUCP_ECOLI
+Sn = 0.5992, Sp = 0.9742, CC = 0.5972, AC = 0.5975
+
+>LACY_ECOLI
+Sn = 0.5898, Sp = 0.9379, CC = 0.5277, AC = 0.5277
+
+>OPPC_SALTY
+Sn = 0.7097, Sp = 0.9263, CC = 0.7102, AC = 0.7114
+
+>PIGR_HUMAN
+Sn = 0.5652, Sp = 1.0000, CC = 0.7467, AC = 0.7758
+
+>SSRG_RAT
+Sn = 0.4651, Sp = 1.0000, CC = 0.5635, AC = 0.5739
+
+>TCR1_ECOLI
+Sn = 0.6367, Sp = 0.9314, CC = 0.5367, AC = 0.5369
+
+Summary (over all sequences):
+Sn = 0.6173, Sp = 0.9141, CC = 0.6209, AC = 0.6230
+
+
+
+>A1AA_HUMAN
+Sn = 0.6954, Sp = 0.8521, CC = 0.6844, AC = 0.6857
+
+>ATPL_ECOLI
+Sn = 0.9524, Sp = 0.8696, CC = 0.7995, AC = 0.7996
+
+>CEK2_CHICK
+Sn = 0.6800, Sp = 0.6071, CC = 0.6304, AC = 0.6314
+
+>CXB1_HUMAN
+Sn = 0.6548, Sp = 0.8333, CC = 0.6477, AC = 0.6496
+
+>CXB1_RAT
+Sn = 0.6548, Sp = 0.8333, CC = 0.6477, AC = 0.6496
+
+>CXB1_XENLA
+Sn = 0.6548, Sp = 0.8462, CC = 0.6478, AC = 0.6498
+
+>CYOA_ECOLI
+Sn = 0.5526, Sp = 0.7241, CC = 0.5861, AC = 0.5901
+
+>EBR_STAAU
+Sn = 0.6026, Sp = 0.9592, CC = 0.4760, AC = 0.4791
+
+>EXBB_ECOLI
+Sn = 0.8545, Sp = 0.8246, CC = 0.7916, AC = 0.7917
+
+>GMCR_HUMAN
+Sn = 0.5769, Sp = 1.0000, CC = 0.7486, AC = 0.7742
+
+>KDPD_ECOLI
+Sn = 0.7349, Sp = 0.9683, CC = 0.8306, AC = 0.8371
+
+>OPPB_SALTY
+Sn = 0.7188, Sp = 0.9293, CC = 0.7164, AC = 0.7174
+
+>PHOR_ECOLI
+Sn = 0.6905, Sp = 0.7838, CC = 0.7092, AC = 0.7103
+
+>SECE_ECOLI
+Sn = 0.6786, Sp = 0.8837, CC = 0.6381, AC = 0.6388
+
+>TOLQ_ECOLI
+Sn = 0.6044, Sp = 1.0000, CC = 0.6929, AC = 0.6993
+
+>TRBM_HUMAN
+Sn = 0.7917, Sp = 0.3878, CC = 0.5281, AC = 0.5577
+
+Summary (over all sequences):
+Sn = 0.6885, Sp = 0.8438, CC = 0.7141, AC = 0.7165
+
+
+
+>1PRCH
+Sn = 0.3684, Sp = 1.0000, CC = 0.5923, AC = 0.6603
+
+>DHG_ECOLI
+Sn = 0.7451, Sp = 0.9383, CC = 0.8158, AC = 0.8199
+
+>DHSC_BACSU
+Sn = 0.6436, Sp = 0.7927, CC = 0.4839, AC = 0.4840
+
+>EGFR_CHICK
+Sn = 0.6522, Sp = 0.5357, CC = 0.5759, AC = 0.5785
+
+>EGFR_DROME
+Sn = 0.4375, Sp = 0.4242, CC = 0.4166, AC = 0.4166
+
+>EGFR_HUMAN
+Sn = 0.6957, Sp = 0.6957, CC = 0.6898, AC = 0.6898
+
+>HG2A_HUMAN
+Sn = 0.5185, Sp = 1.0000, CC = 0.7033, AC = 0.7362
+
+>HISM_SALTY
+Sn = 0.4000, Sp = 0.9545, CC = 0.4902, AC = 0.5047
+
+>HISQ_SALTY
+Sn = 0.5429, Sp = 0.8636, CC = 0.5162, AC = 0.5185
+
+>LEP3_ERWCA
+Sn = 0.6599, Sp = 0.9238, CC = 0.6176, AC = 0.6179
+
+>MAGL_MOUSE
+Sn = 0.6000, Sp = 0.4800, CC = 0.5199, AC = 0.5229
+
+>MOTA_ECOLI
+Sn = 0.7037, Sp = 0.9344, CC = 0.7549, AC = 0.7584
+
+>MTR_ECOLI
+Sn = 0.6255, Sp = 0.9515, CC = 0.5752, AC = 0.5752
+
+>TRSR_HUMAN
+Sn = 0.5769, Sp = 1.0000, CC = 0.7539, AC = 0.7811
+
+>UPKB_BOVIN
+Sn = 0.6495, Sp = 0.9844, CC = 0.7219, AC = 0.7267
+
+>VMT2_IAANN
+Sn = 0.7222, Sp = 1.0000, CC = 0.8242, AC = 0.8313
+
+Summary (over all sequences):
+Sn = 0.6117, Sp = 0.8717, CC = 0.6940, AC = 0.7021
+
+
+
+>1PRCL
+Sn = 0.6500, Sp = 0.8966, CC = 0.6297, AC = 0.6310
+
+>CYOE_ECOLI
+Sn = 0.6692, Sp = 0.6593, CC = 0.3865, AC = 0.3865
+
+>DMSC_ECOLI
+Sn = 0.5967, Sp = 0.9310, CC = 0.5126, AC = 0.5127
+
+>EXBD_ECOLI
+Sn = 0.6667, Sp = 1.0000, CC = 0.7973, AC = 0.8101
+
+>FCE2_HUMAN
+Sn = 0.6923, Sp = 1.0000, CC = 0.8210, AC = 0.8330
+
+>GSPK_ERWCA
+Sn = 0.4762, Sp = 1.0000, CC = 0.6780, AC = 0.7208
+
+>ITA5_MOUSE
+Sn = 0.6923, Sp = 1.0000, CC = 0.8235, AC = 0.8359
+
+>LECH_HUMAN
+Sn = 0.5238, Sp = 1.0000, CC = 0.7107, AC = 0.7440
+
+>LECI_MOUSE
+Sn = 0.5714, Sp = 1.0000, CC = 0.7441, AC = 0.7701
+
+>LHA4_RHOAC
+Sn = 1.0000, Sp = 0.8077, CC = 0.8255, AC = 0.8257
+
+>MALG_ECOLI
+Sn = 0.7381, Sp = 0.9118, CC = 0.7128, AC = 0.7134
+
+>MOTB_ECOLI
+Sn = 0.4545, Sp = 1.0000, CC = 0.6605, AC = 0.7071
+
+>SUIS_HUMAN
+Sn = 1.0000, Sp = 0.9091, CC = 0.9529, AC = 0.9540
+
+>TCB1_RABIT
+Sn = 0.5455, Sp = 1.0000, CC = 0.7264, AC = 0.7564
+
+>TOLR_ECOLI
+Sn = 0.5600, Sp = 1.0000, CC = 0.7155, AC = 0.7370
+
+>VNB_INBBE
+Sn = 0.6364, Sp = 1.0000, CC = 0.7593, AC = 0.7711
+
+Summary (over all sequences):
+Sn = 0.6545, Sp = 0.8724, CC = 0.7218, AC = 0.7272
+
+
+
+>5H1A_HUMAN
+Sn = 0.5607, Sp = 1.0000, CC = 0.6554, AC = 0.6634
+
+>A2AA_HUMAN
+Sn = 0.6763, Sp = 0.9915, CC = 0.7440, AC = 0.7478
+
+>AA1R_CANFA
+Sn = 0.5636, Sp = 0.9894, CC = 0.6152, AC = 0.6182
+
+>AA2A_CANFA
+Sn = 0.6909, Sp = 0.8837, CC = 0.6658, AC = 0.6668
+
+>CB21_PEA
+Sn = 0.2586, Sp = 1.0000, CC = 0.4543, AC = 0.5284
+
+>CVAA_ECOLI
+Sn = 1.0000, Sp = 0.8148, CC = 0.8969, AC = 0.9010
+
+>CYOD_ECOLI
+Sn = 0.8772, Sp = 0.8333, CC = 0.6877, AC = 0.6877
+
+>EDG1_HUMAN
+Sn = 0.5828, Sp = 0.9596, CC = 0.6368, AC = 0.6415
+
+>GLRA_RAT
+Sn = 0.5443, Sp = 0.6825, CC = 0.5769, AC = 0.5800
+
+>GP1B_HUMAN
+Sn = 0.6800, Sp = 0.7083, CC = 0.6527, AC = 0.6529
+
+>GSPG_ERWCA
+Sn = 0.6190, Sp = 1.0000, CC = 0.7645, AC = 0.7816
+
+>GSPH_ERWCA
+Sn = 0.6190, Sp = 1.0000, CC = 0.7686, AC = 0.7867
+
+>IGGB_STRSP
+Sn = 0.5714, Sp = 0.3871, CC = 0.4389, AC = 0.4462
+
+>IL2A_HUMAN
+Sn = 0.6316, Sp = 0.5714, CC = 0.5692, AC = 0.5698
+
+>MALF_ECOLI
+Sn = 0.6513, Sp = 0.9000, CC = 0.6909, AC = 0.6949
+
+>PTGB_ECOLI
+Sn = 0.5628, Sp = 0.9091, CC = 0.5562, AC = 0.5583
+
+Summary (over all sequences):
+Sn = 0.6097, Sp = 0.8912, CC = 0.6689, AC = 0.6751
+
+
+
+>1PRCM
+Sn = 0.7008, Sp = 0.9368, CC = 0.7184, AC = 0.7202
+
+>C561_BOVIN
+Sn = 0.5362, Sp = 1.0000, CC = 0.6031, AC = 0.6073
+
+>FTSL_ECOLI
+Sn = 0.7500, Sp = 1.0000, CC = 0.8454, AC = 0.8514
+
+>GSPJ_ERWCA
+Sn = 0.5714, Sp = 1.0000, CC = 0.7391, AC = 0.7637
+
+>IG1R_HUMAN
+Sn = 0.6667, Sp = 0.5926, CC = 0.6215, AC = 0.6225
+
+>LEP_ECOLI
+Sn = 0.6842, Sp = 1.0000, CC = 0.8103, AC = 0.8219
+
+>MELB_ECOLI
+Sn = 0.7262, Sp = 0.9104, CC = 0.6481, AC = 0.6481
+
+>OPS1_CALVI
+Sn = 0.5523, Sp = 0.9896, CC = 0.6232, AC = 0.6284
+
+>OPS2_DROME
+Sn = 0.5349, Sp = 0.9892, CC = 0.6141, AC = 0.6208
+
+>OPS3_DROME
+Sn = 0.4593, Sp = 0.9518, CC = 0.5316, AC = 0.5411
+
+>OPS4_DROME
+Sn = 0.4824, Sp = 0.9762, CC = 0.5657, AC = 0.5748
+
+>OPSB_HUMAN
+Sn = 0.5465, Sp = 1.0000, CC = 0.6154, AC = 0.6197
+
+>OPSD_BOVIN
+Sn = 0.5698, Sp = 1.0000, CC = 0.6333, AC = 0.6369
+
+>OPSG_HUMAN
+Sn = 0.5698, Sp = 0.9245, CC = 0.5803, AC = 0.5829
+
+>OPSR_HUMAN
+Sn = 0.5930, Sp = 0.9189, CC = 0.5922, AC = 0.5942
+
+>PTMA_ECOLI
+Sn = 0.6293, Sp = 0.5748, CC = 0.5078, AC = 0.5081
+
+Summary (over all sequences):
+Sn = 0.5820, Sp = 0.9151, CC = 0.6461, AC = 0.6532
+
+
+
+>A15_HUMAN
+Sn = 0.8222, Sp = 0.9487, CC = 0.8238, AC = 0.8243
+
+>CD37_HUMAN
+Sn = 0.8000, Sp = 0.8182, CC = 0.7206, AC = 0.7206
+
+>CD53_HUMAN
+Sn = 0.8152, Sp = 0.8824, CC = 0.7459, AC = 0.7460
+
+>CD63_RAT
+Sn = 0.7667, Sp = 0.9857, CC = 0.8084, AC = 0.8099
+
+>CD81_HUMAN
+Sn = 0.7396, Sp = 0.9861, CC = 0.7814, AC = 0.7831
+
+>CD82_HUMAN
+Sn = 0.6848, Sp = 0.9844, CC = 0.7559, AC = 0.7603
+
+>CD9_CERAE
+Sn = 0.7263, Sp = 0.9857, CC = 0.7678, AC = 0.7694
+
+>CO02_HUMAN
+Sn = 0.8000, Sp = 0.9863, CC = 0.8338, AC = 0.8349
+
+>GPT_CRILO
+Sn = 0.5700, Sp = 0.8837, CC = 0.5353, AC = 0.5367
+
+>HEMA_PI4HA
+Sn = 0.7500, Sp = 0.6818, CC = 0.7043, AC = 0.7050
+
+>IL2B_HUMAN
+Sn = 0.5600, Sp = 0.4667, CC = 0.4858, AC = 0.4876
+
+>IM23_SCHMA
+Sn = 0.8636, Sp = 0.9744, CC = 0.8682, AC = 0.8684
+
+>LHB5_RHOAC
+Sn = 0.6522, Sp = 1.0000, CC = 0.6719, AC = 0.6722
+
+>PBPB_ECOLI
+Sn = 0.5000, Sp = 0.6316, CC = 0.5507, AC = 0.5542
+
+>RHAT_ECOLI
+Sn = 0.6762, Sp = 0.9660, CC = 0.6298, AC = 0.6298
+
+>SECD_ECOLI
+Sn = 0.6270, Sp = 0.8778, CC = 0.6903, AC = 0.6964
+
+Summary (over all sequences):
+Sn = 0.7112, Sp = 0.9133, CC = 0.7499, AC = 0.7528
+
+
+
+marc@skodborg:~/Documents/AU/Git/machine-learning-bioinformatics/transmembrane_project$ 
+
+
+
+leaving out and validating on file 0
+Summary (over all sequences):
+Sn = 0.5577, Sp = 0.8482, CC = 0.6347, AC = 0.6441
+
+leaving out and validating on file 1
+Summary (over all sequences):
+Sn = 0.6647, Sp = 0.8538, CC = 0.7113, AC = 0.7151
+
+leaving out and validating on file 2
+Summary (over all sequences):
+Sn = 0.6251, Sp = 0.8961, CC = 0.6676, AC = 0.6723
+
+leaving out and validating on file 3
+Summary (over all sequences):
+Sn = 0.6173, Sp = 0.9141, CC = 0.6209, AC = 0.6230
+
+leaving out and validating on file 4
+Summary (over all sequences):
+Sn = 0.6885, Sp = 0.8438, CC = 0.7141, AC = 0.7165
+
+leaving out and validating on file 5
+Summary (over all sequences):
+Sn = 0.6117, Sp = 0.8717, CC = 0.6940, AC = 0.7021
+
+leaving out and validating on file 6
+Summary (over all sequences):
+Sn = 0.6545, Sp = 0.8724, CC = 0.7218, AC = 0.7272
+
+leaving out and validating on file 7
+Summary (over all sequences):
+Sn = 0.6097, Sp = 0.8912, CC = 0.6689, AC = 0.6751
+
+leaving out and validating on file 8
+Summary (over all sequences):
+Sn = 0.5820, Sp = 0.9151, CC = 0.6461, AC = 0.6532
+
+leaving out and validating on file 9
+Summary (over all sequences):
+Sn = 0.7112, Sp = 0.9133, CC = 0.7499, AC = 0.7528
+
+
+
+AC mean:
+(0.6441 + 0.7151 + 0.6723 + 0.6230 + 0.7165 + 
+ 0.7021 + 0.7272 + 0.6751 + 0.6532 + 0.7528) / 10   =   0.68814
+
+AC variance:
+((0.6441 - 0.68814)^2 + (0.7151 - 0.68814)^2 + 
+ (0.6723 - 0.68814)^2 + (0.6230 - 0.68814)^2 + 
+ (0.7165 - 0.68814)^2 + (0.7021 - 0.68814)^2 + 
+ (0.7272 - 0.68814)^2 + (0.6751 - 0.68814)^2 +
+ (0.6532 - 0.68814)^2 + (0.7528 - 0.68814)^2) / 10  =   0.0015257104
