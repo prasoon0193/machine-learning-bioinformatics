@@ -63,3 +63,1108 @@ emissions
 0.124645892351 0.0169971671388 0.00849858356941 0.0028328611898 0.0651558073654 0.130311614731 0.127478753541 0.0113314447592 0.0028328611898 0.042492917847 0.127478753541 0.0113314447592 0.00849858356941 0.0169971671388 0.0368271954674 0.0169971671388 0.042492917847 0.056657223796 0.0934844192635 0.056657223796
 0.124645892351 0.014164305949 0.0 0.0 0.042492917847 0.101983002833 0.113314447592 0.00849858356941 0.0 0.0594900849858 0.209631728045 0.014164305949 0.0028328611898 0.014164305949 0.0339943342776 0.0056657223796 0.0198300283286 0.0396600566572 0.14447592068 0.0509915014164
 
+
+
+state i:
+transition to i: 0.979309928821 
+transition to A: 0.0206900711787 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.078795
+C: 0.014571
+E: 0.067222
+D: 0.049112
+G: 0.069980
+F: 0.034240
+I: 0.042995
+H: 0.023027
+K: 0.070760
+M: 0.027824
+L: 0.082993
+N: 0.040777
+Q: 0.040357
+P: 0.053430
+S: 0.071599
+R: 0.082153
+T: 0.053250
+W: 0.013072
+V: 0.057207
+Y: 0.026625
+
+state A:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 1.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.119533
+C: 0.005830
+E: 0.002915
+D: 0.002915
+G: 0.061224
+F: 0.055393
+I: 0.113702
+H: 0.008746
+K: 0.008746
+M: 0.055393
+L: 0.204081
+N: 0.014577
+Q: 0.008746
+P: 0.026239
+S: 0.032069
+R: 0.005830
+T: 0.046647
+W: 0.040816
+V: 0.110787
+Y: 0.075801
+
+state B:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 1.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.104956
+C: 0.002915
+E: 0.014577
+D: 0.005830
+G: 0.096209
+F: 0.067055
+I: 0.119533
+H: 0.002915
+K: 0.011661
+M: 0.029154
+L: 0.218658
+N: 0.029154
+Q: 0.005830
+P: 0.040816
+S: 0.049562
+R: 0.008746
+T: 0.034985
+W: 0.026239
+V: 0.107871
+Y: 0.023323
+
+state C:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 1.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.096209
+C: 0.011661
+E: 0.002915
+D: 0.002915
+G: 0.058309
+F: 0.075801
+I: 0.090379
+H: 0.014577
+K: 0.008746
+M: 0.049562
+L: 0.247813
+N: 0.017492
+Q: 0.011661
+P: 0.040816
+S: 0.037900
+R: 0.029154
+T: 0.043731
+W: 0.026239
+V: 0.099125
+Y: 0.034985
+
+state D:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 1.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.102040
+C: 0.014577
+E: 0.023323
+D: 0.005830
+G: 0.081632
+F: 0.072886
+I: 0.137026
+H: 0.002915
+K: 0.017492
+M: 0.023323
+L: 0.180758
+N: 0.011661
+Q: 0.002915
+P: 0.026239
+S: 0.075801
+R: 0.011661
+T: 0.046647
+W: 0.023323
+V: 0.113702
+Y: 0.026239
+
+state E:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 1.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.078717
+C: 0.008746
+E: 0.002915
+D: 0.005830
+G: 0.084548
+F: 0.084548
+I: 0.157434
+H: 0.005830
+K: 0.000000
+M: 0.052478
+L: 0.154518
+N: 0.040816
+Q: 0.002915
+P: 0.023323
+S: 0.040816
+R: 0.014577
+T: 0.061224
+W: 0.029154
+V: 0.116618
+Y: 0.034985
+
+state M:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.914993
+transition to F: 0.085006
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.117719
+C: 0.022304
+E: 0.005204
+D: 0.007187
+G: 0.077323
+F: 0.098884
+I: 0.118463
+H: 0.003965
+K: 0.004213
+M: 0.037670
+L: 0.171995
+N: 0.014126
+Q: 0.007930
+P: 0.030235
+S: 0.051548
+R: 0.004460
+T: 0.057496
+W: 0.023048
+V: 0.117472
+Y: 0.028748
+
+state F:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 1.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.102040
+C: 0.020408
+E: 0.008746
+D: 0.002915
+G: 0.069970
+F: 0.093294
+I: 0.139941
+H: 0.011661
+K: 0.000000
+M: 0.040816
+L: 0.169096
+N: 0.005830
+Q: 0.008746
+P: 0.040816
+S: 0.058309
+R: 0.005830
+T: 0.046647
+W: 0.034985
+V: 0.099125
+Y: 0.040816
+
+state G:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 1.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.102040
+C: 0.014577
+E: 0.008746
+D: 0.002915
+G: 0.099125
+F: 0.084548
+I: 0.096209
+H: 0.005830
+K: 0.000000
+M: 0.043731
+L: 0.157434
+N: 0.011661
+Q: 0.011661
+P: 0.026239
+S: 0.061224
+R: 0.008746
+T: 0.032069
+W: 0.049562
+V: 0.125364
+Y: 0.058309
+
+state H:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 1.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.102040
+C: 0.002915
+E: 0.017492
+D: 0.005830
+G: 0.104956
+F: 0.102040
+I: 0.096209
+H: 0.005830
+K: 0.008746
+M: 0.032069
+L: 0.113702
+N: 0.046647
+Q: 0.005830
+P: 0.040816
+S: 0.061224
+R: 0.008746
+T: 0.072886
+W: 0.020408
+V: 0.096209
+Y: 0.055393
+
+state I:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 1.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.102040
+C: 0.005830
+E: 0.011661
+D: 0.005830
+G: 0.119533
+F: 0.064139
+I: 0.084548
+H: 0.011661
+K: 0.002915
+M: 0.052478
+L: 0.163265
+N: 0.017492
+Q: 0.020408
+P: 0.011661
+S: 0.061224
+R: 0.000000
+T: 0.058309
+W: 0.072886
+V: 0.090379
+Y: 0.043731
+
+state J:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 1.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.110787
+C: 0.008746
+E: 0.011661
+D: 0.008746
+G: 0.061224
+F: 0.122448
+I: 0.090379
+H: 0.014577
+K: 0.008746
+M: 0.023323
+L: 0.154518
+N: 0.005830
+Q: 0.014577
+P: 0.032069
+S: 0.067055
+R: 0.002915
+T: 0.034985
+W: 0.032069
+V: 0.134110
+Y: 0.061224
+
+state o:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.988672
+transition to P: 0.011327
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.066231
+C: 0.022963
+E: 0.059633
+D: 0.055470
+G: 0.069978
+F: 0.041090
+I: 0.047079
+H: 0.022450
+K: 0.047111
+M: 0.023603
+L: 0.088777
+N: 0.051210
+Q: 0.044228
+P: 0.056014
+S: 0.070971
+R: 0.050057
+T: 0.062900
+W: 0.019248
+V: 0.063444
+Y: 0.037535
+
+state P:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 1.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.101983
+C: 0.005665
+E: 0.014164
+D: 0.014164
+G: 0.076487
+F: 0.107648
+I: 0.113314
+H: 0.011331
+K: 0.000000
+M: 0.056657
+L: 0.175637
+N: 0.016997
+Q: 0.014164
+P: 0.059490
+S: 0.016997
+R: 0.005665
+T: 0.016997
+W: 0.045325
+V: 0.096317
+Y: 0.050991
+
+state Q:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 1.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.084985
+C: 0.005665
+E: 0.002832
+D: 0.008498
+G: 0.104815
+F: 0.104815
+I: 0.107648
+H: 0.016997
+K: 0.008498
+M: 0.045325
+L: 0.164305
+N: 0.011331
+Q: 0.008498
+P: 0.036827
+S: 0.045325
+R: 0.005665
+T: 0.048158
+W: 0.039660
+V: 0.093484
+Y: 0.056657
+
+state R:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 1.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.101983
+C: 0.014164
+E: 0.000000
+D: 0.031161
+G: 0.062322
+F: 0.084985
+I: 0.121813
+H: 0.014164
+K: 0.002832
+M: 0.042492
+L: 0.144475
+N: 0.014164
+Q: 0.016997
+P: 0.028328
+S: 0.056657
+R: 0.005665
+T: 0.059490
+W: 0.053824
+V: 0.101983
+Y: 0.042492
+
+state S:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 1.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.116147
+C: 0.014164
+E: 0.005665
+D: 0.011331
+G: 0.096317
+F: 0.084985
+I: 0.133144
+H: 0.005665
+K: 0.005665
+M: 0.042492
+L: 0.158640
+N: 0.005665
+Q: 0.025495
+P: 0.014164
+S: 0.045325
+R: 0.002832
+T: 0.065155
+W: 0.028328
+V: 0.090651
+Y: 0.048158
+
+state T:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 1.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.150141 
+C: 0.014164 
+E: 0.002832 
+D: 0.002832 
+G: 0.093484 
+F: 0.073654 
+I: 0.118980 
+H: 0.008498 
+K: 0.005665 
+M: 0.039660 
+L: 0.101983 
+N: 0.014164 
+Q: 0.025495 
+P: 0.019830 
+S: 0.048158 
+R: 0.002832 
+T: 0.056657 
+W: 0.022662 
+V: 0.138810 
+Y: 0.059490
+
+state N:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.916330
+transition to O: 0.083669
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.105001
+C: 0.026783
+E: 0.006636
+D: 0.005925
+G: 0.088646
+F: 0.084143
+I: 0.124911
+H: 0.009243
+K: 0.004977
+M: 0.041242
+L: 0.169471
+N: 0.017539
+Q: 0.007584
+P: 0.026309
+S: 0.060440
+R: 0.001896
+T: 0.050011
+W: 0.017065
+V: 0.116852
+Y: 0.035316
+
+state O:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 1.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.087818
+C: 0.028328
+E: 0.025495
+D: 0.002832
+G: 0.062322
+F: 0.087818
+I: 0.141643
+H: 0.005665
+K: 0.008498
+M: 0.031161
+L: 0.178470
+N: 0.014164
+Q: 0.008498
+P: 0.019830
+S: 0.042492
+R: 0.005665
+T: 0.022662
+W: 0.022662
+V: 0.167138
+Y: 0.036827
+
+state V:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 1.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.096317
+C: 0.014164
+E: 0.000000
+D: 0.005665
+G: 0.073654
+F: 0.073654
+I: 0.110481
+H: 0.011331
+K: 0.005665
+M: 0.031161
+L: 0.133144
+N: 0.019830
+Q: 0.005665
+P: 0.016997
+S: 0.073654
+R: 0.005665
+T: 0.056657
+W: 0.028328
+V: 0.147308
+Y: 0.090651
+
+state X:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 1.0 
+transition to Z: 0.0
+A: 0.113314
+C: 0.022662
+E: 0.011331
+D: 0.014164
+G: 0.087818
+F: 0.096317
+I: 0.144475
+H: 0.011331
+K: 0.008498
+M: 0.039660
+L: 0.158640
+N: 0.019830
+Q: 0.011331
+P: 0.011331
+S: 0.042492
+R: 0.011331
+T: 0.031161
+W: 0.022662
+V: 0.084985
+Y: 0.056657
+
+state Y:
+transition to i: 0.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 1.0
+A: 0.124645
+C: 0.016997
+E: 0.008498
+D: 0.002832
+G: 0.065155
+F: 0.130311
+I: 0.127478
+H: 0.011331
+K: 0.002832
+M: 0.042492
+L: 0.127478
+N: 0.011331
+Q: 0.008498
+P: 0.016997
+S: 0.036827
+R: 0.016997
+T: 0.042492
+W: 0.056657
+V: 0.093484
+Y: 0.056657
+
+state Z:
+transition to i: 1.0 
+transition to A: 0.0 
+transition to B: 0.0 
+transition to C: 0.0 
+transition to D: 0.0 
+transition to E: 0.0 
+transition to M: 0.0 
+transition to F: 0.0 
+transition to G: 0.0 
+transition to H: 0.0 
+transition to I: 0.0 
+transition to J: 0.0 
+transition to o: 0.0 
+transition to P: 0.0 
+transition to Q: 0.0 
+transition to R: 0.0 
+transition to S: 0.0 
+transition to T: 0.0 
+transition to N: 0.0 
+transition to O: 0.0 
+transition to V: 0.0 
+transition to X: 0.0 
+transition to Y: 0.0 
+transition to Z: 0.0
+A: 0.124645
+C: 0.014164
+E: 0.000000
+D: 0.000000
+G: 0.042492
+F: 0.101983
+I: 0.113314
+H: 0.008498
+K: 0.000000
+M: 0.059490
+L: 0.209631
+N: 0.014164
+Q: 0.002832
+P: 0.014164
+S: 0.033994
+R: 0.005665
+T: 0.019830
+W: 0.039660
+V: 0.144475
+Y: 0.050991
